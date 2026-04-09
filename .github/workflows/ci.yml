@@ -23,8 +23,17 @@ jobs:
       - name: Build with Maven
         run: mvn clean package -DskipTests
 
+      - name: Run Tests
+        run: mvn test -Dtest=TodoSimpleTest
+
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
           name: todo-api-jar
           path: target/*.jar
+
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: target/surefire-reports/
